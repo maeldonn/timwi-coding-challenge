@@ -64,9 +64,6 @@ $ npm serve
 
 ## Fabriqué avec
 
-Entrez les programmes/logiciels/ressources que vous avez utilisé pour développer votre projet
-
-_exemples :_
 * [Spring](https://spring.io/) - Framework Java
 * [Vue.js](https://vuejs.org/) - Framework Javascript
 * [PostgreSQL](https://www.postgresql.org/) - Base de données relationnelle
