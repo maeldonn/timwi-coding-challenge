@@ -6,8 +6,6 @@ Développez les fonctionnalités suivantes dans la technologie web cible en util
 
 ### Pré-requis
 
-Ce qu'il est requis pour commencer avec votre projet...
-
 - Java 11
 - Node/Npm
 - Docker
@@ -17,13 +15,13 @@ Ce qu'il est requis pour commencer avec votre projet...
 Tout d'abord vous devez vous placer dans le dossier racine du projet
 
 ```shell
-$ cd spotify-challenge
+$ cd timwi-coding-challenge
 ```
 
 Ensuite vous devez installer les dépendances maven du projet spring boot
 
 ```shell
-$ ./mvnw clean install 
+$ ./mvnw clean install -DskipTests
 ```
 
 Ensuite vous devez installer les dépendances npm du projet Vue.js
