@@ -24,7 +24,7 @@ export default {
   methods: {
     search(filter) {
       axios
-        .get(`http://localhost:8080/api/v1/albums/search?searchFilter=${filter}`)
+        .get(`${process.env.VUE_APP_ROOT_API}/albums/search?searchFilter=${filter}`)
         .then((result) => {
           this.albums = result.data.payload;
         })

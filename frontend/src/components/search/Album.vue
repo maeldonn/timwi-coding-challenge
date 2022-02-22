@@ -35,20 +35,19 @@ export default {
   methods: {
     add() {
       axios
-          .post(`http://localhost:8080/api/v1/albums/remove/${this.album.id}`,{})
+          .post(`${process.env.VUE_APP_ROOT_API}/albums/add/${this.album.id}`)
           .then(() => {
-            this.personalList = !this.personalList;
+            this.personalList = true;
           })
           .catch(() => {
             // Handle error
           });
-      this.personalList = !this.personalList;
     },
     remove() {
       axios
-          .delete(`http://localhost:8080/api/v1/albums/remove/${this.album.id}`)
+          .delete(`${process.env.VUE_APP_ROOT_API}/albums/remove/${this.album.id}`)
           .then(() => {
-            this.personalList = !this.personalList;
+            this.personalList = false;
           })
           .catch(() => {
             // Handle error
