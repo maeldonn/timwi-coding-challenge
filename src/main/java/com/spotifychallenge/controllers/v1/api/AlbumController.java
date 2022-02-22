@@ -6,6 +6,7 @@ import com.spotifychallenge.dto.model.AlbumDto;
 import com.spotifychallenge.dto.response.Response;
 import com.spotifychallenge.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import java.util.List;
 /**
  * REST endpoints for the album ressource
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/albums")
 public class AlbumController {

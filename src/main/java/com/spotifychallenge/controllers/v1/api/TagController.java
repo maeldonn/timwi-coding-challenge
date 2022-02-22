@@ -6,6 +6,7 @@ import com.spotifychallenge.dto.model.TagDto;
 import com.spotifychallenge.dto.response.Response;
 import com.spotifychallenge.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * REST endpoints for the tag ressource
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/tags")
 public class TagController {
