@@ -12,6 +12,8 @@ Développez les fonctionnalités suivantes dans la technologie web cible en util
 
 ### Installation
 
+*[Si vous disposez de docker-compose vous pouvez passer au démarrage](#Démarrage)*
+
 Tout d'abord vous devez vous placer dans le dossier racine du projet
 
 ```shell
@@ -34,27 +36,49 @@ $ cd frontend
 $ npm install
 ```
 
+### Génération d'un token
+
+Vous devez générer un [token](https://developer.spotify.com/console/get-search-item/). Il faudra ensuite l'exporter comme variable d'environnement.
+
+```shell
+$ EXPORT TOKEN=YOUR_TOKEN_HERE
+```
+
 ## Démarrage
 
-Vous devez générer un [token](https://developer.spotify.com/console/get-search-item/) et le renseigner dans le fichier application.properties
+### Docker-compose
 
-```
-token.secret=YOUR_TOKEN_HERE
+On vient modifier la valeur de la variable *TOKEN* dans le fichier *start.sh* puis : 
+
+```shell
+$ chmod +x start.sh
 ```
 
-Tout d'abord vous devez lancer la base de données
+```shell
+$ ./start.sh
+```
+
+### Manuel
+
+Tout d'abord vous devez lancer la base de données :
 
 ```shell
 $ docker run --name postgresql-container -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres
 ```
 
-Ensuite vous devez lancer le backend en étant à la racine du projet
+Ensuite on vient créer nos variables d'environnement avant de lancer le backend et on renseigne le token :
+
+```shell
+$ export DB_HOST=localhost; export DB_PORT=5432; export DB_NAME=postgres; export DB_USERNAME=postgres; export DB_PASSWORD=password; export SPOTIFY_TOKEN=YOUR_TOKEN_HERE
+ ```
+
+Ensuite vous devez lancer le backend en étant à la racine du projet :
 
 ```shell
 $ ./mvnw spring-boot:run
  ```
 
-Puis vous pouvez lancer le frontend en étant dans le dossier frontend
+Puis vous pouvez lancer le frontend en étant dans le dossier frontend :
 
 ```shell
 $ npm serve

@@ -1,4 +1,5 @@
-FROM maven:3.8.4-eclipse-temurin-11 as maven
+### STAGE 1: Build ###
+FROM maven:3.8.4-eclipse-temurin-11 AS build
 
 COPY ./pom.xml ./pom.xml
 
@@ -8,10 +9,18 @@ COPY ./src ./src
 
 RUN mvn package -DskipTests
 
+### STAGE 2: Run ###
 FROM adoptopenjdk/openjdk11
 
 WORKDIR /spotify-challenge
 
-COPY --from=maven target/spotify-challenge-0.0.1-SNAPSHOT.jar ./
+ENV DB_HOST=postgres
+ENV DB_PORT=5432
+ENV DB_NAME=postgres
+ENV DB_USERNAME=postgres
+ENV DB_PASSWORD=password
+ENV SPOTIFY_TOKEN=YOUR_TOKEN_HERE
 
-CMD ["java", "-jar", "./spotify-challenge-0.0.1-SNAPSHOT.jar"]
+COPY --from=build target/spotify-challenge-0.0.1-SNAPSHOT.jar ./
+
+ENTRYPOINT ["java", "-jar", "./spotify-challenge-0.0.1-SNAPSHOT.jar"]
