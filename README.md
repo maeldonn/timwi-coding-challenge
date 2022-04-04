@@ -38,24 +38,15 @@ $ npm install
 
 ### Génération d'un token
 
-Vous devez générer un [token](https://developer.spotify.com/console/get-search-item/). Il faudra ensuite l'exporter comme variable d'environnement.
-
-```shell
-$ EXPORT TOKEN=YOUR_TOKEN_HERE
-```
+Vous devez générer un [token](https://developer.spotify.com/console/get-search-item/) et le rensigner dans le fichier *application.yml*.
 
 ## Démarrage
 
 ### Docker-compose
 
-On vient modifier la valeur de la variable *TOKEN* dans le fichier *start.sh* puis : 
-
+On se place à la racine du projet puis :
 ```shell
-$ chmod +x start.sh
-```
-
-```shell
-$ ./start.sh
+$ docker-compose up --build -d
 ```
 
 ### Manuel
@@ -65,12 +56,6 @@ Tout d'abord vous devez lancer la base de données :
 ```shell
 $ docker run --name postgresql-container -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres
 ```
-
-Ensuite on vient créer nos variables d'environnement avant de lancer le backend et on renseigne le token :
-
-```shell
-$ export DB_HOST=localhost; export DB_PORT=5432; export DB_NAME=postgres; export DB_USERNAME=postgres; export DB_PASSWORD=password; export SPOTIFY_TOKEN=YOUR_TOKEN_HERE
- ```
 
 Ensuite vous devez lancer le backend en étant à la racine du projet :
 

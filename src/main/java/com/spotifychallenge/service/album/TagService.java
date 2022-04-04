@@ -1,6 +1,6 @@
-package com.spotifychallenge.service;
+package com.spotifychallenge.service.album;
 
-import com.spotifychallenge.dto.model.TagDto;
+import com.spotifychallenge.dto.model.album.TagDto;
 
 /**
  * Service of Tag

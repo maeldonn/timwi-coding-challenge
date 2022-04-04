@@ -1,0 +1,34 @@
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+
+  cache:
+    type: redis
+    redis:
+      cache-null-values: true
+      time-to-live: 4000
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+
+  # Spring Fox 3.0.0 not supporting new PathPattern Based Path Matching Strategy for Spring MVC which is now the new default from spring-boot 2.6.0
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+# TODO: Déplacer dans un fichier avec que mes propres propriétés
+# TODO: Faire une classe pour accéder à ses propriétés comme dans le template
+spotify:
+  client-id: 4e273f0cf9d94649a1a13ad2ccd00825
+  client-secret: 72f92f901ea24c5ca2c3c029dda73398
+  base-url: https://api.spotify.com/v1

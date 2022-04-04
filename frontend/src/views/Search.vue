@@ -1,19 +1,19 @@
 <template>
   <div class="search">
     <SearchForm v-on:search="search"/>
-    <SearchList :albums="albums"/>
+    <AlbumList :albums="albums" :isSearch="true"/>
   </div>
 </template>
 
 <script>
 import SearchForm from '@/components/search/SearchForm';
-import axios from 'axios';
-import SearchList from '@/components/search/SearchList';
+import AlbumList from '@/components/shared/AlbumList';
+import {getAlbums} from "@/api/album-api";
 
 export default {
   name: 'Search',
   components: {
-    SearchList,
+    AlbumList,
     SearchForm,
   },
   data() {
@@ -23,13 +23,15 @@ export default {
   },
   methods: {
     search(filter) {
-      axios
-        .get(`${process.env.VUE_APP_ROOT_API}/albums/search?searchFilter=${filter}`)
+      if (!filter) return;
+      getAlbums(filter)
         .then((result) => {
-          this.albums = result.data.payload;
+          this.albums = result.data;
         })
-        .catch(() => {
-          this.albums = [];
+        .catch((error) => {
+          if (error.response.status === 401) {
+            window.location.href = error.response.data;
+          }
         });
     }
   }

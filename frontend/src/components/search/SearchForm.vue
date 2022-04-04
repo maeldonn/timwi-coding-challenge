@@ -3,6 +3,7 @@
     <div class="search">
 
       <v-text-field
+          v-on:keyup.enter="search()"
           v-model="searchFilter"
           filled
           label="Search"

@@ -3,7 +3,17 @@ module.exports = {
     'vuetify'
   ],
   devServer: {
-    port: 4200,
-    proxy: 'https://localhost:8080/'
+    port: 3000,
+    // proxy: 'http://localhost:8080/api/v1/',
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:8080/',
+    //     ws: true,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': ''
+    //     }
+    //   }
+    // }
   }
 }

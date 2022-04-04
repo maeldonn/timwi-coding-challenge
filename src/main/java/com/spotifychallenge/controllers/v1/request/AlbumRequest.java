@@ -28,14 +28,17 @@ public class AlbumRequest {
     @JsonProperty("artist")
     private String artist;
 
-    @JsonProperty("thumbnail")
-    private String thumbnail;
+    @JsonProperty("image")
+    private String image;
 
     @JsonProperty("date")
     private Date date;
 
     @JsonProperty("duration")
     private Integer duration;
+
+    @JsonProperty("personal")
+    private Boolean personal;
 
     @JsonProperty("favorite")
     private Boolean favorite;

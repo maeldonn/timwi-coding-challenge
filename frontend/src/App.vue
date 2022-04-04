@@ -26,7 +26,9 @@
     </v-app-bar>
 
     <div class="views">
-      <router-view/>
+      <keep-alive include="Search">
+        <router-view/>
+      </keep-alive>
     </div>
 
   </v-app>
@@ -34,7 +36,7 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
 };
 </script>
 

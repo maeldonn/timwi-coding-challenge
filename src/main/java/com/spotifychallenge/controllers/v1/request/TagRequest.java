@@ -2,7 +2,6 @@ package com.spotifychallenge.controllers.v1.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.spotifychallenge.dto.model.AlbumDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,5 +23,5 @@ public class TagRequest {
     private String name;
 
     @JsonProperty("albums")
-    private List<AlbumDto> albums;
+    private List<AlbumRequest> albums;
 }
