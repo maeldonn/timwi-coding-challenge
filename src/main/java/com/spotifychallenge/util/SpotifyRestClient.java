@@ -2,6 +2,8 @@ package com.spotifychallenge.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spotifychallenge.dto.model.AlbumDto;
+import com.spotifychallenge.exception.specific.AlbumNotFoundException;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -41,17 +43,20 @@ public class SpotifyRestClient {
         return Arrays.asList(objectMapper.readValue(jsonNode, AlbumDto[].class));
     }
 
-    public AlbumDto searchAlbum(String albumId) throws IOException {
+    public AlbumDto searchAlbum(String albumId) {
+        try {
+            // Get JSON response
+            String json = webClient.get().uri(GET_ALBUM + albumId)
+                    .headers(h -> h.setBearerAuth(token))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
 
-        // Get JSON response
-        String json = webClient.get().uri(GET_ALBUM + albumId)
-                .headers(h -> h.setBearerAuth(token))
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
-
-        // Convert to an array of Album
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(json, AlbumDto.class);
+            // Convert to an array of Album
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(json, AlbumDto.class);
+        } catch(IOException exception) {
+            throw new AlbumNotFoundException();
+        }
     }
 }

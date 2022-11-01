@@ -2,6 +2,7 @@ package com.spotifychallenge.service;
 
 import com.spotifychallenge.dto.mapper.AlbumMapper;
 import com.spotifychallenge.dto.model.AlbumDto;
+import com.spotifychallenge.exception.specific.AlbumNotFoundException;
 import com.spotifychallenge.model.Album;
 import com.spotifychallenge.repository.AlbumRepository;
 import com.spotifychallenge.util.SpotifyRestClient;
@@ -90,8 +91,7 @@ public class AlbumServiceImpl implements AlbumService {
             // Return the entity updated
             return AlbumMapper.toAlbumDto(albumRepository.getById(albumDto.getAlbumId()));
         } else {
-            // TODO: Personal exception
-            throw new RuntimeException();
+            throw new AlbumNotFoundException();
         }
     }
 }

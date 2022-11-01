@@ -6,6 +6,7 @@ import com.spotifychallenge.dto.model.AlbumDto;
 import com.spotifychallenge.dto.response.Response;
 import com.spotifychallenge.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -32,50 +34,28 @@ public class AlbumController {
     }
 
     @GetMapping("/search")
-    public Response getAlbums(@RequestParam String searchFilter) throws IOException {
-        List<AlbumDto> albums = albumService.getAlbums(searchFilter);
-        return Response.ok().setPayload(albums);
+    public List<AlbumDto> getAlbums(@RequestParam String searchFilter) throws IOException {
+        return albumService.getAlbums(searchFilter);
     }
 
+    @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping("/add/{albumId}")
-    public Response addAlbumToPersonalList(@PathVariable String albumId) {
-        AlbumDto albumDto = albumService.addAlbumToPersonalList(albumId);
-
-        // If no album, then the parameter is invalid
-        if (albumDto != null) {
-            Response.badRequest();
-        }
-
-        return Response.created().setPayload(albumDto);
+    public AlbumDto addAlbumToPersonalList(@PathVariable String albumId) {
+        return albumService.addAlbumToPersonalList(albumId);
     }
 
     @DeleteMapping("/remove/{albumId}")
-    public Response removeAlbumFromList(@PathVariable String albumId) {
+    public void removeAlbumFromList(@PathVariable String albumId) {
         albumService.removeAlbumFromPersonalList(albumId);
-        return Response.ok();
     }
 
     @PutMapping("/favorites/add")
-    public Response addAlbumToFavorites(@RequestBody AlbumRequest albumRequest) {
-        AlbumDto albumDto = albumService.addAlbumToFavorites(AlbumMapper.toAlbumDto(albumRequest));
-
-        // If no album, then the parameter is invalid
-        if (albumDto != null) {
-            Response.badRequest();
-        }
-
-        return Response.ok().setPayload(albumDto);
+    public AlbumDto addAlbumToFavorites(@RequestBody AlbumRequest albumRequest) {
+        return albumService.addAlbumToFavorites(AlbumMapper.toAlbumDto(albumRequest));
     }
 
     @PutMapping("/favorites/remove")
-    public Response removeAlbumFromFavorites(@RequestBody AlbumRequest albumRequest) {
-        AlbumDto albumDto = albumService.removeAlbumFromFavorites(AlbumMapper.toAlbumDto(albumRequest));
-
-        // If no album, then the album is not in personal list
-        if (albumDto != null) {
-            Response.notFound();
-        }
-
-        return Response.ok().setPayload(albumDto);
+    public AlbumDto removeAlbumFromFavorites(@RequestBody AlbumRequest albumRequest) {
+        return albumService.removeAlbumFromFavorites(AlbumMapper.toAlbumDto(albumRequest));
     }
 }

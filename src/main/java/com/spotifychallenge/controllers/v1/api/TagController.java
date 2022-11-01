@@ -24,8 +24,7 @@ public class TagController {
     }
 
     @PostMapping("/add")
-    public Response createTag(@RequestBody TagRequest tagRequest) {
-        TagDto tagDto = tagService.createTag(TagMapper.toTagDto(tagRequest));
-        return Response.ok().setPayload(tagDto);
+    public TagDto createTag(@RequestBody TagRequest tagRequest) {
+        return tagService.createTag(TagMapper.toTagDto(tagRequest));
     }
 }
