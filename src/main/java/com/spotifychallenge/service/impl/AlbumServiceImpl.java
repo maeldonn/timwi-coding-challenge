@@ -43,19 +43,14 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumDto addAlbumToPersonalList(String albumId) {
-        try {
-            // Search if id is valid
-            AlbumDto albumDto = spotifyRestClient.searchAlbum(albumId);
+        // Search if id is valid
+        AlbumDto albumDto = spotifyRestClient.searchAlbum(albumId);
 
-            // If it is a valid id, add album to personal list
-            Album album = AlbumMapper.toAlbum(albumDto);
-            albumRepository.saveAndFlush(album);
+        // If it is a valid id, add album to personal list
+        Album album = AlbumMapper.toAlbum(albumDto);
+        albumRepository.saveAndFlush(album);
 
-            return albumDto;
-
-        } catch (IOException exception) {
-            return null;
-        }
+        return albumDto;
     }
 
     @Override
@@ -70,22 +65,17 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumDto addAlbumToFavorites(AlbumDto albumDto) {
-        try {
-            // Search if id is valid
-            spotifyRestClient.searchAlbum(albumDto.getAlbumId());
+        // Search if id is valid
+        spotifyRestClient.searchAlbum(albumDto.getAlbumId());
 
-            // Add album to personal list if it is not already
-            albumRepository.saveAndFlush(AlbumMapper.toAlbum(albumDto));
+        // Add album to personal list if it is not already
+        albumRepository.saveAndFlush(AlbumMapper.toAlbum(albumDto));
 
-            // Add album to favorites
-            albumRepository.setAlbumFavoriteById(true, albumDto.getAlbumId());
+        // Add album to favorites
+        albumRepository.setAlbumFavoriteById(true, albumDto.getAlbumId());
 
-            // Return the entity updated
-            return AlbumMapper.toAlbumDto(albumRepository.getById(albumDto.getAlbumId()));
-
-        } catch (IOException exception) {
-            return null;
-        }
+        // Return the entity updated
+        return AlbumMapper.toAlbumDto(albumRepository.getById(albumDto.getAlbumId()));
     }
 
     @Override
@@ -99,8 +89,9 @@ public class AlbumServiceImpl implements AlbumService {
 
             // Return the entity updated
             return AlbumMapper.toAlbumDto(albumRepository.getById(albumDto.getAlbumId()));
+        } else {
+            // TODO: Personal exception
+            throw new RuntimeException();
         }
-
-        return null;
     }
 }
