@@ -10,9 +10,6 @@ import lombok.experimental.Accessors;
 
 import java.util.List;
 
-/**
- * Tag request
- */
 @Getter
 @Setter
 @Accessors(chain = true)

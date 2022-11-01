@@ -9,9 +9,6 @@ import lombok.experimental.Accessors;
 
 import java.util.Date;
 
-/**
- * Album request
- */
 @Getter
 @Setter
 @Accessors(chain = true)

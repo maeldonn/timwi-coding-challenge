@@ -12,28 +12,19 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Implementation of AlbumService
- */
 @Service
 public class AlbumServiceImpl implements AlbumService {
 
-    //SERVICES
     private final SpotifyRestClient spotifyRestClient;
+
     private final AlbumRepository albumRepository;
 
-    /**
-     * {@inheritDoc}
-     */
     @Autowired
     public AlbumServiceImpl(SpotifyRestClient spotifyRestClient, AlbumRepository albumRepository) {
         this.spotifyRestClient = spotifyRestClient;
         this.albumRepository = albumRepository;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<AlbumDto> getAlbums(String searchFilter) throws IOException {
         List<AlbumDto> albums = spotifyRestClient.searchAlbums(searchFilter);
@@ -51,9 +42,6 @@ public class AlbumServiceImpl implements AlbumService {
         return albums;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public AlbumDto addAlbumToPersonalList(String albumId) {
         try {
@@ -81,9 +69,6 @@ public class AlbumServiceImpl implements AlbumService {
         album.ifPresent(albumRepository::delete);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public AlbumDto addAlbumToFavorites(AlbumDto albumDto) {
         try {
@@ -104,9 +89,6 @@ public class AlbumServiceImpl implements AlbumService {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public AlbumDto removeAlbumFromFavorites(AlbumDto albumDto) {
 

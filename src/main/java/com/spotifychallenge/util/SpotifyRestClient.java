@@ -12,9 +12,6 @@ import java.util.List;
 
 import static com.spotifychallenge.constants.SpotifyConstants.*;
 
-/**
- * Spotify REST Client
- */
 @Service
 public class SpotifyRestClient {
 
@@ -27,13 +24,6 @@ public class SpotifyRestClient {
         this.webClient = WebClient.create(BASE_URL);
     }
 
-    /**
-     * Get albums
-     *
-     * @param searchFilter the filter
-     * @return 20 albums
-     * @throws IOException
-     */
     public List<AlbumDto> searchAlbums(String searchFilter) throws IOException {
 
         // Get JSON response
@@ -51,13 +41,6 @@ public class SpotifyRestClient {
         return Arrays.asList(objectMapper.readValue(jsonNode, AlbumDto[].class));
     }
 
-    /**
-     * Get an album
-     *
-     * @param albumId the album id
-     * @return The album
-     * @throws IOException if the id is invalid
-     */
     public AlbumDto searchAlbum(String albumId) throws IOException {
 
         // Get JSON response

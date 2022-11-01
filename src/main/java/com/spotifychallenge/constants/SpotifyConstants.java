@@ -1,8 +1,5 @@
 package com.spotifychallenge.constants;
 
-/**
- * URL of Spotify API
- */
 public class SpotifyConstants {
 
     private SpotifyConstants() {

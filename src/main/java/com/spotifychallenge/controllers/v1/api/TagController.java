@@ -12,15 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * REST endpoints for the tag ressource
- */
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/tags")
 public class TagController {
 
-    // SERVICES
     private final TagService tagService;
 
     @Autowired
@@ -28,12 +24,6 @@ public class TagController {
         this.tagService = tagService;
     }
 
-    /**
-     * Create a new tag
-     *
-     * @param tagRequest the tag to create
-     * @return The tag created
-     */
     @PostMapping("/add")
     public Response createTag(@RequestBody TagRequest tagRequest) {
         TagDto tagDto = tagService.createTag(TagMapper.toTagDto(tagRequest));

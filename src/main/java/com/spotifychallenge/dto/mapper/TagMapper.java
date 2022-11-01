@@ -10,21 +10,12 @@ import com.spotifychallenge.model.Tag;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Tag Mapper
- */
 public class TagMapper {
 
     private TagMapper() {
         // NO INSTANCE
     }
 
-    /**
-     * Map Tag to TagDto
-     *
-     * @param tag
-     * @return tagDto
-     */
     public static TagDto toTagDto(Tag tag) {
         TagDto tagDto = new TagDto();
 
@@ -42,12 +33,6 @@ public class TagMapper {
         return tagDto;
     }
 
-    /**
-     * Map tagDto to Tag
-     *
-     * @param tagDto
-     * @return tag
-     */
     public static Tag toTag(TagDto tagDto) {
         Tag tag = new Tag();
 
@@ -65,12 +50,6 @@ public class TagMapper {
         return tag;
     }
 
-    /**
-     * Map TagRequest to TagDto
-     *
-     * @param tagRequest
-     * @return tagDto
-     */
     public static TagDto toTagDto(TagRequest tagRequest) {
         TagDto tagDto = new TagDto();
 

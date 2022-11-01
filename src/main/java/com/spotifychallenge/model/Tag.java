@@ -13,9 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
 
-/**
- * Tag Data Access Object
- */
 @Getter
 @Setter
 @NoArgsConstructor

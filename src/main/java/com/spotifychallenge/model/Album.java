@@ -15,9 +15,6 @@ import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Album Data Access Object
- */
 @Getter
 @Setter
 @NoArgsConstructor

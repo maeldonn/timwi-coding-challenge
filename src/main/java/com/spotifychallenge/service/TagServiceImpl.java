@@ -6,13 +6,9 @@ import com.spotifychallenge.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Implementation of TagService
- */
 @Service
 public class TagServiceImpl implements TagService {
 
-    //SERVICES
     private final TagRepository tagRepository;
 
     @Autowired
@@ -20,9 +16,6 @@ public class TagServiceImpl implements TagService {
         this.tagRepository = tagRepository;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public TagDto createTag(TagDto tagDto) {
 

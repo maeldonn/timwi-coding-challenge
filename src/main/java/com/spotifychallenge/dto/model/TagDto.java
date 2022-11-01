@@ -8,9 +8,6 @@ import lombok.ToString;
 
 import java.util.List;
 
-/**
- * Tag Data Transfer Object
- */
 @Getter
 @Setter
 @NoArgsConstructor

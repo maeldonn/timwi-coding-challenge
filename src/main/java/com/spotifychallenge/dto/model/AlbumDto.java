@@ -10,9 +10,6 @@ import lombok.ToString;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Album Data Transfer Object
- */
 @Getter
 @Setter
 @NoArgsConstructor
