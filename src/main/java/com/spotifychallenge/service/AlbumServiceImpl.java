@@ -19,7 +19,6 @@ public class AlbumServiceImpl implements AlbumService {
 
     private final AlbumRepository albumRepository;
 
-    @Autowired
     public AlbumServiceImpl(SpotifyRestClient spotifyRestClient, AlbumRepository albumRepository) {
         this.spotifyRestClient = spotifyRestClient;
         this.albumRepository = albumRepository;

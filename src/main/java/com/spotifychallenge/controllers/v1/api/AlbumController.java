@@ -27,7 +27,6 @@ public class AlbumController {
 
     private final AlbumService albumService;
 
-    @Autowired
     public AlbumController(AlbumService albumService) {
         this.albumService = albumService;
     }
