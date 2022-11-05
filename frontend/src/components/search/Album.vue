@@ -6,7 +6,7 @@
       </v-card-title>
 
       <v-card-text>
-        Release date: {{ new Date(album.date).toLocaleDateString() }}<br>
+        Release date: {{ new Date(album.releaseDate).toLocaleDateString() }}<br>
         Total tracks: {{ album.duration }}<br>
         <span v-if="album.tags">Tags: {{ album.tags }}</span>
       </v-card-text>

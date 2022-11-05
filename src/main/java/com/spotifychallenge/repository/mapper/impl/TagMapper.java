@@ -12,7 +12,7 @@ public class TagMapper implements SpotifyChallengeMapper<Tag, TagEntity> {
     @Override
     public TagEntity mapToEntity(Tag model) {
         TagEntity tag = new TagEntity();
-        tag.setTagId(model.getTagId());
+        tag.setId(model.getId());
         tag.setName(model.getName());
         return tag;
     }
@@ -20,7 +20,7 @@ public class TagMapper implements SpotifyChallengeMapper<Tag, TagEntity> {
     @Override
     public Tag mapToModel(TagEntity entity) {
         return Tag.builder()
-            .tagId(entity.getTagId())
+            .id(entity.getId())
             .name(entity.getName())
             .build();
     }

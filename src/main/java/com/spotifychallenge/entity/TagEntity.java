@@ -14,13 +14,13 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "TAGS")
+@Table(name = "TAG")
 public class TagEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "TAG_ID")
-    private Long tagId = null;
+    @Column(name = "ID")
+    private Long id = null;
 
     @Column(name = "NAME", unique = true)
     private String name = null;

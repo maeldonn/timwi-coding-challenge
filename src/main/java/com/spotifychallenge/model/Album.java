@@ -14,11 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 public class Album {
 
-    private String albumId;
+    private String id;
 
     private String title;
 
-    private LocalDate date;
+    private LocalDate releaseDate;
 
     private Integer duration;
 

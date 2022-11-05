@@ -27,7 +27,7 @@ public class AlbumServiceImpl implements AlbumService {
         List<Album> albums = spotifyRestClient.searchAlbums(searchFilter);
 
         for (Album album : albums) {
-            albumRepository.findAlbum(album.getAlbumId()).ifPresent(personalAlbum -> album.setFavorite(personalAlbum.isFavorite()));
+            albumRepository.findAlbum(album.getId()).ifPresent(personalAlbum -> album.setFavorite(personalAlbum.isFavorite()));
         }
 
         return albums;

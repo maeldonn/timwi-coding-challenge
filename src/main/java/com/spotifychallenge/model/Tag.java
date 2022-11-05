@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 public class Tag {
 
-    private Long tagId;
+    private Long id;
 
     private String name;
 

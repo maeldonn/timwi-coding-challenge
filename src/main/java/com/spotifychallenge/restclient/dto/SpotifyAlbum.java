@@ -10,7 +10,7 @@ import java.util.List;
 public class SpotifyAlbum {
 
     @JsonProperty("id")
-    private String albumId = null;
+    private String id = null;
 
     @JsonProperty("name")
     private String title = null;
@@ -22,7 +22,7 @@ public class SpotifyAlbum {
     private List<SpotifyAlbumImageDto> images = null;
 
     @JsonProperty("release_date")
-    private LocalDate date = null;
+    private LocalDate releaseDate = null;
 
     @JsonProperty("total_tracks")
     private Integer duration = null;
@@ -31,7 +31,7 @@ public class SpotifyAlbum {
     public static class SpotifyArtistDto {
 
         @JsonProperty("id")
-        private String artistId = null;
+        private String id = null;
 
         @JsonProperty("name")
         private String name = null;

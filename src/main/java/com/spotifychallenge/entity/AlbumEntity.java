@@ -16,18 +16,18 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "ALBUMS")
+@Table(name = "ALBUM")
 public class AlbumEntity {
 
     @Id
-    @Column(name = "ALBUM_ID")
-    private String albumId = null;
+    @Column(name = "ID")
+    private String id = null;
 
     @Column(name = "TITLE")
     private String title = null;
 
     @Column(name = "DATE")
-    private LocalDate date = null;
+    private LocalDate releaseDate = null;
 
     @Column(name = "DURATION")
     private Integer duration = null;

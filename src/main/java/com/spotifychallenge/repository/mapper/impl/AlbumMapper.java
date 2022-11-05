@@ -12,9 +12,9 @@ public class AlbumMapper implements SpotifyChallengeMapper<Album, AlbumEntity> {
     @Override
     public AlbumEntity mapToEntity(Album model) {
         AlbumEntity album = new AlbumEntity();
-        album.setAlbumId(model.getAlbumId());
+        album.setId(model.getId());
         album.setTitle(model.getTitle());
-        album.setDate(model.getDate());
+        album.setReleaseDate(model.getReleaseDate());
         album.setDuration(model.getDuration());
         album.setFavorite(model.isFavorite());
         return album;
@@ -23,9 +23,9 @@ public class AlbumMapper implements SpotifyChallengeMapper<Album, AlbumEntity> {
     @Override
     public Album mapToModel(AlbumEntity entity) {
         return Album.builder()
-            .albumId(entity.getAlbumId())
+            .id(entity.getId())
             .title(entity.getTitle())
-            .date(entity.getDate())
+            .releaseDate(entity.getReleaseDate())
             .duration(entity.getDuration())
             .favorite(entity.getFavorite())
             .build();

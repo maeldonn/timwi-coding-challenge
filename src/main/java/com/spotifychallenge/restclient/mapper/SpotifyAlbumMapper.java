@@ -11,9 +11,9 @@ public class SpotifyAlbumMapper {
 
     public static Album mapToModel(SpotifyAlbum spotifyAlbum) {
         return Album.builder()
-                .albumId(spotifyAlbum.getAlbumId())
+                .id(spotifyAlbum.getId())
                 .title(spotifyAlbum.getTitle())
-                .date(spotifyAlbum.getDate())
+                .releaseDate(spotifyAlbum.getReleaseDate())
                 .duration(spotifyAlbum.getDuration())
                 .build();
     }
