@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import {addAlbumToPersonalList, removeAlbumFromPersonalList} from "@/controllers/album.controller";
 
 export default {
   name: 'Album',
@@ -33,25 +33,13 @@ export default {
     };
   },
   methods: {
-    add() {
-      axios
-          .post(`${process.env.VUE_APP_ROOT_API}/albums/add/${this.album.id}`)
-          .then(() => {
-            this.personalList = true;
-          })
-          .catch(() => {
-            // Handle error
-          });
+    async add() {
+      await addAlbumToPersonalList(this.album.id)
+      this.personalList = true;
     },
-    remove() {
-      axios
-          .delete(`${process.env.VUE_APP_ROOT_API}/albums/remove/${this.album.id}`)
-          .then(() => {
-            this.personalList = false;
-          })
-          .catch(() => {
-            // Handle error
-          });
+    async remove() {
+      await removeAlbumFromPersonalList(this.album.id);
+      this.personalList = false;
     },
     getReleaseDate(releaseDate) {
       const date = new Date(releaseDate);

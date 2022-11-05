@@ -7,8 +7,8 @@
 
 <script>
 import SearchForm from '@/components/search/SearchForm';
-import axios from 'axios';
 import SearchList from '@/components/search/SearchList';
+import {getAlbums} from "@/controllers/album.controller";
 
 export default {
   name: 'Search',
@@ -22,15 +22,8 @@ export default {
     };
   },
   methods: {
-    search(filter) {
-      axios
-        .get(`${process.env.VUE_APP_ROOT_API}/albums/search?searchFilter=${filter}`)
-        .then((result) => {
-          this.albums = result.data;
-        })
-        .catch(() => {
-          this.albums = [];
-        });
+    async search(filter) {
+      this.albums = await getAlbums(filter);
     }
   }
 };
