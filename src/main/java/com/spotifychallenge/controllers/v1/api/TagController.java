@@ -1,16 +1,13 @@
 package com.spotifychallenge.controllers.v1.api;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+import com.spotifychallenge.controllers.v1.request.TagRequest;
+import com.spotifychallenge.model.Tag;
+import com.spotifychallenge.service.TagService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spotifychallenge.controllers.v1.request.TagRequest;
-import com.spotifychallenge.model.Tag;
-import com.spotifychallenge.service.TagService;
-
-@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/tags")
 public class TagController {
