@@ -1,8 +1,6 @@
 package com.spotifychallenge.entity;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -15,8 +13,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Table(name = "TAGS")
 public class TagEntity {
