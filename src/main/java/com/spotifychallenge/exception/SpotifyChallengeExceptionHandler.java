@@ -1,23 +1,21 @@
 package com.spotifychallenge.exception;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.server.handler.ResponseStatusExceptionHandler;
+
+import java.time.ZonedDateTime;
 
 @ControllerAdvice
 public class SpotifyChallengeExceptionHandler {
 
-    @ExceptionHandler({ SpotifyChallengeGenericException.class })
-    public ResponseEntity<SpotifyChallengeException> handleApiRequestException(Exception e) {
+    @ExceptionHandler({ SpotifyChallengeException.class })
+    public ResponseEntity<SpotifyChallengeError> handleApiRequestException(Exception e) {
 
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
-        SpotifyChallengeException exception = new SpotifyChallengeException(
+        SpotifyChallengeError exception = new SpotifyChallengeError(
             e.getMessage(),
             e,
             badRequest,
