@@ -1,7 +1,10 @@
 package com.spotifychallenge.restclient.mapper;
 
+import com.spotifychallenge.exception.SpotifyChallengeException;
 import com.spotifychallenge.model.Album;
 import com.spotifychallenge.restclient.dto.SpotifyAlbum;
+
+import java.time.LocalDate;
 
 public class SpotifyAlbumMapper {
 
@@ -13,8 +16,17 @@ public class SpotifyAlbumMapper {
         return Album.builder()
                 .id(spotifyAlbum.getId())
                 .title(spotifyAlbum.getTitle())
-                .releaseDate(spotifyAlbum.getReleaseDate())
+                .releaseDate(getReleaseDate(spotifyAlbum))
                 .duration(spotifyAlbum.getDuration())
                 .build();
+    }
+
+    private static LocalDate getReleaseDate(SpotifyAlbum spotifyAlbum) {
+        String releaseDatePrecision = spotifyAlbum.getReleaseDatePrecision();
+        return switch (releaseDatePrecision) {
+            case "day" -> LocalDate.parse(spotifyAlbum.getReleaseDate());
+            case "year" -> LocalDate.ofYearDay(Integer.parseInt(spotifyAlbum.getReleaseDate()), 1);
+            default -> throw new SpotifyChallengeException("Unknown date format");
+        };
     }
 }

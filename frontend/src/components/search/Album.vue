@@ -6,7 +6,7 @@
       </v-card-title>
 
       <v-card-text>
-        Release date: {{ new Date(album.releaseDate).toLocaleDateString() }}<br>
+        Release date: {{ getReleaseDate(album.releaseDate) }}<br>
         Total tracks: {{ album.duration }}<br>
         <span v-if="album.tags">Tags: {{ album.tags }}</span>
       </v-card-text>
@@ -52,6 +52,13 @@ export default {
           .catch(() => {
             // Handle error
           });
+    },
+    getReleaseDate(releaseDate) {
+      const date = new Date(releaseDate);
+      if (date.getDay() === 0 && date.getMonth() === 0) {
+        return date.getFullYear();
+      }
+      return date.toLocaleDateString("fr-FR");
     }
   }
 };
