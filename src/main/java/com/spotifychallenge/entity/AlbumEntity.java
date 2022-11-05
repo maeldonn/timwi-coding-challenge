@@ -37,8 +37,8 @@ public class AlbumEntity {
 
     @ManyToMany
     @JoinTable(
-        name = "ALBUM_TAGS",
-        joinColumns = @JoinColumn(name = "ALBUM_ID"),
-        inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
+            name = "ALBUM_TAGS",
+            joinColumns = @JoinColumn(name = "ALBUM_ID"),
+            inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
     List<TagEntity> tags = null;
 }

@@ -10,16 +10,16 @@ import java.time.ZonedDateTime;
 @ControllerAdvice
 public class SpotifyChallengeExceptionHandler {
 
-    @ExceptionHandler({ SpotifyChallengeException.class })
+    @ExceptionHandler({SpotifyChallengeException.class})
     public ResponseEntity<SpotifyChallengeError> handleApiRequestException(Exception e) {
 
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
         SpotifyChallengeError exception = new SpotifyChallengeError(
-            e.getMessage(),
-            e,
-            badRequest,
-            ZonedDateTime.now()
+                e.getMessage(),
+                e,
+                badRequest,
+                ZonedDateTime.now()
         );
 
         return new ResponseEntity<>(exception, badRequest);

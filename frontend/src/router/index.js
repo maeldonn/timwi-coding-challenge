@@ -6,15 +6,15 @@ import Management from '@/views/Management';
 Vue.use(VueRouter);
 
 const routes = [{
-  path: '/', name: 'Search', component: Search
+    path: '/', name: 'Search', component: Search
 }, {
-  path: '/management', name: 'Management', component: Management,
+    path: '/management', name: 'Management', component: Management,
 }, {
-  path: '*', name: '404', component: Search,
+    path: '*', name: '404', component: Search,
 }]
 
 const router = new VueRouter({
-  routes
+    routes
 });
 
 export default router;

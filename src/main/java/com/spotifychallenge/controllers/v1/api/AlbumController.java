@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,7 +28,7 @@ public class AlbumController {
     }
 
     @GetMapping("/search")
-    public List<Album> getAlbums(@RequestParam String searchFilter) throws IOException {
+    public List<Album> getAlbums(@RequestParam String searchFilter) {
         return albumService.getAlbums(searchFilter);
     }
 

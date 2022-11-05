@@ -23,11 +23,11 @@ public class AlbumMapper implements SpotifyChallengeMapper<Album, AlbumEntity> {
     @Override
     public Album mapToModel(AlbumEntity entity) {
         return Album.builder()
-            .id(entity.getId())
-            .title(entity.getTitle())
-            .releaseDate(entity.getReleaseDate())
-            .duration(entity.getDuration())
-            .favorite(entity.getFavorite())
-            .build();
+                .id(entity.getId())
+                .title(entity.getTitle())
+                .releaseDate(entity.getReleaseDate())
+                .duration(entity.getDuration())
+                .favorite(entity.getFavorite())
+                .build();
     }
 }
