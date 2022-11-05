@@ -1,6 +1,6 @@
 package com.spotifychallenge.service;
 
-import com.spotifychallenge.dto.model.AlbumDto;
+import com.spotifychallenge.dto.AlbumDto;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +13,7 @@ public interface AlbumService {
 
     void removeAlbumFromPersonalList(String albumId);
 
-    AlbumDto addAlbumToFavorites(AlbumDto albumDto);
+    AlbumDto addAlbumToFavorites(String albumId);
 
-    AlbumDto removeAlbumFromFavorites(AlbumDto albumDto);
+    AlbumDto removeAlbumFromFavorites(String albumId);
 }

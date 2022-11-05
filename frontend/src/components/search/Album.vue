@@ -2,12 +2,12 @@
   <div class="album">
     <v-card hover>
       <v-card-title>
-        <h2>{{ album.name }}</h2>
+        <h2>{{ album.title }}</h2>
       </v-card-title>
 
       <v-card-text>
-        Release date: {{ new Date(album.release_date).toLocaleDateString() }}<br>
-        Total tracks: {{ album.total_tracks }}<br>
+        Release date: {{ new Date(album.date).toLocaleDateString() }}<br>
+        Total tracks: {{ album.duration }}<br>
         <span v-if="album.tags">Tags: {{ album.tags }}</span>
       </v-card-text>
 

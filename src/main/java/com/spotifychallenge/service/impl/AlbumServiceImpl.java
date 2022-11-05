@@ -1,17 +1,13 @@
-package com.spotifychallenge.service;
+package com.spotifychallenge.service.impl;
 
-import com.spotifychallenge.dto.mapper.AlbumMapper;
-import com.spotifychallenge.dto.model.AlbumDto;
-import com.spotifychallenge.exception.specific.AlbumNotFoundException;
-import com.spotifychallenge.model.Album;
+import com.spotifychallenge.dto.AlbumDto;
 import com.spotifychallenge.repository.AlbumRepository;
-import com.spotifychallenge.util.SpotifyRestClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.spotifychallenge.restclient.SpotifyRestClient;
+import com.spotifychallenge.service.AlbumService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AlbumServiceImpl implements AlbumService {
@@ -26,72 +22,39 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<AlbumDto> getAlbums(String searchFilter) throws IOException {
+    @Transactional(readOnly = true)
+    public List<AlbumDto> getAlbums(String searchFilter) {
         List<AlbumDto> albums = spotifyRestClient.searchAlbums(searchFilter);
 
-        // Check for favorites in personal list
-        for (AlbumDto albumDto : albums) {
-
-            // Search the album in personal list
-            Optional<Album> album = albumRepository.findById(albumDto.getAlbumId());
-
-            // Set favorite
-            album.ifPresentOrElse(value -> albumDto.setFavorite(value.getFavorite()), () -> albumDto.setFavorite(false));
+        for (AlbumDto album : albums) {
+            albumRepository.findAlbum(album.getAlbumId()).ifPresent(personalAlbum -> album.setFavorite(personalAlbum.isFavorite()));
         }
 
         return albums;
     }
 
     @Override
+    @Transactional
     public AlbumDto addAlbumToPersonalList(String albumId) {
-        // Search if id is valid
         AlbumDto albumDto = spotifyRestClient.searchAlbum(albumId);
-
-        // If it is a valid id, add album to personal list
-        Album album = AlbumMapper.toAlbum(albumDto);
-        albumRepository.saveAndFlush(album);
-
-        return albumDto;
+        return albumRepository.addAlbumToPersonalList(albumDto);
     }
 
     @Override
+    @Transactional
     public void removeAlbumFromPersonalList(String albumId) {
-
-        // Search the entity to delete
-        Optional<Album> album = albumRepository.findById(albumId);
-
-        // Then delete it if entity exist
-        album.ifPresent(albumRepository::delete);
+        albumRepository.removeAlbumFromPersonalList(albumId);
     }
 
     @Override
-    public AlbumDto addAlbumToFavorites(AlbumDto albumDto) {
-        // Search if id is valid
-        spotifyRestClient.searchAlbum(albumDto.getAlbumId());
-
-        // Add album to personal list if it is not already
-        albumRepository.saveAndFlush(AlbumMapper.toAlbum(albumDto));
-
-        // Add album to favorites
-        albumRepository.setAlbumFavoriteById(true, albumDto.getAlbumId());
-
-        // Return the entity updated
-        return AlbumMapper.toAlbumDto(albumRepository.getById(albumDto.getAlbumId()));
+    @Transactional
+    public AlbumDto addAlbumToFavorites(String albumId) {
+        return albumRepository.addAlbumToFavorite(albumId);
     }
 
     @Override
-    public AlbumDto removeAlbumFromFavorites(AlbumDto albumDto) {
-
-        // Check if album is in personal list
-        if (albumRepository.findById(albumDto.getAlbumId()).isPresent()) {
-
-            // Add album to favorites
-            albumRepository.setAlbumFavoriteById(false, albumDto.getAlbumId());
-
-            // Return the entity updated
-            return AlbumMapper.toAlbumDto(albumRepository.getById(albumDto.getAlbumId()));
-        } else {
-            throw new AlbumNotFoundException();
-        }
+    @Transactional
+    public AlbumDto removeAlbumFromFavorites(String albumId) {
+        return albumRepository.removeAlbumFromFavorite(albumId);
     }
 }

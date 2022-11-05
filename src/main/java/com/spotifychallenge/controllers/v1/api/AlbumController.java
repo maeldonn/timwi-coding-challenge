@@ -1,11 +1,8 @@
 package com.spotifychallenge.controllers.v1.api;
 
 import com.spotifychallenge.controllers.v1.request.AlbumRequest;
-import com.spotifychallenge.dto.mapper.AlbumMapper;
-import com.spotifychallenge.dto.model.AlbumDto;
-import com.spotifychallenge.dto.response.Response;
+import com.spotifychallenge.dto.AlbumDto;
 import com.spotifychallenge.service.AlbumService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,11 +48,11 @@ public class AlbumController {
 
     @PutMapping("/favorites/add")
     public AlbumDto addAlbumToFavorites(@RequestBody AlbumRequest albumRequest) {
-        return albumService.addAlbumToFavorites(AlbumMapper.toAlbumDto(albumRequest));
+        return albumService.addAlbumToFavorites(albumRequest.getAlbumId());
     }
 
     @PutMapping("/favorites/remove")
     public AlbumDto removeAlbumFromFavorites(@RequestBody AlbumRequest albumRequest) {
-        return albumService.removeAlbumFromFavorites(AlbumMapper.toAlbumDto(albumRequest));
+        return albumService.removeAlbumFromFavorites(albumRequest.getAlbumId());
     }
 }

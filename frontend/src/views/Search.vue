@@ -26,7 +26,7 @@ export default {
       axios
         .get(`${process.env.VUE_APP_ROOT_API}/albums/search?searchFilter=${filter}`)
         .then((result) => {
-          this.albums = result.data.payload;
+          this.albums = result.data;
         })
         .catch(() => {
           this.albums = [];

@@ -1,9 +1,8 @@
-package com.spotifychallenge.service;
+package com.spotifychallenge.service.impl;
 
-import com.spotifychallenge.dto.mapper.TagMapper;
-import com.spotifychallenge.dto.model.TagDto;
+import com.spotifychallenge.dto.TagDto;
 import com.spotifychallenge.repository.TagRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.spotifychallenge.service.TagService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,11 +16,6 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public TagDto createTag(TagDto tagDto) {
-
-        // Creation of the tag
-        tagRepository.saveAndFlush(TagMapper.toTag(tagDto));
-
-        // Get the new tag and return it
-        return TagMapper.toTagDto(tagRepository.findByName(tagDto.getName()));
+        return tagRepository.createTag(tagDto);
     }
 }
