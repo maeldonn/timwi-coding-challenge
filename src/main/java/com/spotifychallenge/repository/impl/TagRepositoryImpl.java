@@ -1,7 +1,7 @@
 package com.spotifychallenge.repository.impl;
 
-import com.spotifychallenge.dto.TagDto;
 import com.spotifychallenge.model.Tag;
+import com.spotifychallenge.entity.TagEntity;
 import com.spotifychallenge.repository.TagRepository;
 import com.spotifychallenge.repository.TagSpringDataRepository;
 import com.spotifychallenge.repository.mapper.impl.TagMapper;
@@ -20,8 +20,8 @@ public class TagRepositoryImpl implements TagRepository {
     }
 
     @Override
-    public TagDto createTag(TagDto tag) {
-        Tag tagToSave = mapper.mapToEntity(tag);
+    public Tag createTag(Tag tag) {
+        TagEntity tagToSave = mapper.mapToEntity(tag);
         return mapper.mapToModel(repository.save(tagToSave));
     }
 }

@@ -1,6 +1,6 @@
 package com.spotifychallenge.restclient;
 
-import com.spotifychallenge.dto.AlbumDto;
+import com.spotifychallenge.model.Album;
 import com.spotifychallenge.restclient.dto.SpotifyAlbum;
 import com.spotifychallenge.restclient.dto.SpotifySearch;
 import com.spotifychallenge.restclient.mapper.SpotifyAlbumMapper;
@@ -26,7 +26,7 @@ public class SpotifyRestClient {
         this.webClient = WebClient.create(BASE_URL);
     }
 
-    public List<AlbumDto> searchAlbums(String searchFilter) {
+    public List<Album> searchAlbums(String searchFilter) {
         return webClient.get().uri(GET_ALBUMS + searchFilter)
                 .headers(h -> h.setBearerAuth(token))
                 .retrieve()
@@ -38,7 +38,7 @@ public class SpotifyRestClient {
                 .toList();
     }
 
-    public AlbumDto searchAlbum(String albumId) {
+    public Album searchAlbum(String albumId) {
         SpotifyAlbum spotifyAlbum = webClient.get().uri(GET_ALBUM + albumId)
                 .headers(h -> h.setBearerAuth(token))
                 .retrieve()

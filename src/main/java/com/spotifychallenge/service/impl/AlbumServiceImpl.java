@@ -1,6 +1,6 @@
 package com.spotifychallenge.service.impl;
 
-import com.spotifychallenge.dto.AlbumDto;
+import com.spotifychallenge.model.Album;
 import com.spotifychallenge.repository.AlbumRepository;
 import com.spotifychallenge.restclient.SpotifyRestClient;
 import com.spotifychallenge.service.AlbumService;
@@ -23,10 +23,10 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<AlbumDto> getAlbums(String searchFilter) {
-        List<AlbumDto> albums = spotifyRestClient.searchAlbums(searchFilter);
+    public List<Album> getAlbums(String searchFilter) {
+        List<Album> albums = spotifyRestClient.searchAlbums(searchFilter);
 
-        for (AlbumDto album : albums) {
+        for (Album album : albums) {
             albumRepository.findAlbum(album.getAlbumId()).ifPresent(personalAlbum -> album.setFavorite(personalAlbum.isFavorite()));
         }
 
@@ -35,9 +35,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     @Transactional
-    public AlbumDto addAlbumToPersonalList(String albumId) {
-        AlbumDto albumDto = spotifyRestClient.searchAlbum(albumId);
-        return albumRepository.addAlbumToPersonalList(albumDto);
+    public Album addAlbumToPersonalList(String albumId) {
+        Album album = spotifyRestClient.searchAlbum(albumId);
+        return albumRepository.addAlbumToPersonalList(album);
     }
 
     @Override
@@ -48,13 +48,13 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     @Transactional
-    public AlbumDto addAlbumToFavorites(String albumId) {
+    public Album addAlbumToFavorites(String albumId) {
         return albumRepository.addAlbumToFavorite(albumId);
     }
 
     @Override
     @Transactional
-    public AlbumDto removeAlbumFromFavorites(String albumId) {
+    public Album removeAlbumFromFavorites(String albumId) {
         return albumRepository.removeAlbumFromFavorite(albumId);
     }
 }

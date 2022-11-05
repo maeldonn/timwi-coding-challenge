@@ -1,8 +1,8 @@
 package com.spotifychallenge.service;
 
-import com.spotifychallenge.dto.TagDto;
+import com.spotifychallenge.model.Tag;
 
 public interface TagService {
 
-    TagDto createTag(TagDto tagDto);
+    Tag createTag(Tag tag);
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spotifychallenge.controllers.v1.request.TagRequest;
-import com.spotifychallenge.dto.TagDto;
+import com.spotifychallenge.model.Tag;
 import com.spotifychallenge.service.TagService;
 
 @CrossOrigin
@@ -22,8 +22,8 @@ public class TagController {
     }
 
     @PostMapping("/add")
-    public TagDto createTag(@RequestBody TagRequest tagRequest) {
-        TagDto tag = TagDto.builder()
+    public Tag createTag(@RequestBody TagRequest tagRequest) {
+        Tag tag = Tag.builder()
                 .name(tagRequest.getName())
                 .albums(tagRequest.getAlbums())
                 .build();

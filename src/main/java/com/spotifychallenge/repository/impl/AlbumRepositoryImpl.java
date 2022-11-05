@@ -1,7 +1,7 @@
 package com.spotifychallenge.repository.impl;
 
-import com.spotifychallenge.dto.AlbumDto;
 import com.spotifychallenge.model.Album;
+import com.spotifychallenge.entity.AlbumEntity;
 import com.spotifychallenge.repository.AlbumRepository;
 import com.spotifychallenge.repository.AlbumSpringDataRepository;
 import com.spotifychallenge.repository.mapper.impl.AlbumMapper;
@@ -22,14 +22,14 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     }
 
     @Override
-    public Optional<AlbumDto> findAlbum(String albumId) {
-        Optional<Album> album = repository.findById(albumId);
+    public Optional<Album> findAlbum(String albumId) {
+        Optional<AlbumEntity> album = repository.findById(albumId);
         return album.map(mapper::mapToModel);
     }
 
     @Override
-    public AlbumDto addAlbumToPersonalList(AlbumDto album) {
-        Album albumToSave = mapper.mapToEntity(album);
+    public Album addAlbumToPersonalList(Album album) {
+        AlbumEntity albumToSave = mapper.mapToEntity(album);
         return mapper.mapToModel(repository.save(albumToSave));
     }
 
@@ -39,15 +39,15 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     }
 
     @Override
-    public AlbumDto addAlbumToFavorite(String albumId) {
-        Album album = repository.getReferenceById(albumId);
+    public Album addAlbumToFavorite(String albumId) {
+        AlbumEntity album = repository.getReferenceById(albumId);
         album.setFavorite(true);
         return mapper.mapToModel(album);
     }
 
     @Override
-    public AlbumDto removeAlbumFromFavorite(String albumId) {
-        Album album = repository.getReferenceById(albumId);
+    public Album removeAlbumFromFavorite(String albumId) {
+        AlbumEntity album = repository.getReferenceById(albumId);
         album.setFavorite(false);
         return mapper.mapToModel(album);
     }

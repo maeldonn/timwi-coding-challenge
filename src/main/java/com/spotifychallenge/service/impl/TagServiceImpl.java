@@ -1,6 +1,6 @@
 package com.spotifychallenge.service.impl;
 
-import com.spotifychallenge.dto.TagDto;
+import com.spotifychallenge.model.Tag;
 import com.spotifychallenge.repository.TagRepository;
 import com.spotifychallenge.service.TagService;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public TagDto createTag(TagDto tagDto) {
-        return tagRepository.createTag(tagDto);
+    public Tag createTag(Tag tag) {
+        return tagRepository.createTag(tag);
     }
 }

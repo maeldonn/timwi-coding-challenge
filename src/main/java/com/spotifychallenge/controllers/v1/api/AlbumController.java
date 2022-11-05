@@ -1,7 +1,7 @@
 package com.spotifychallenge.controllers.v1.api;
 
 import com.spotifychallenge.controllers.v1.request.AlbumRequest;
-import com.spotifychallenge.dto.AlbumDto;
+import com.spotifychallenge.model.Album;
 import com.spotifychallenge.service.AlbumService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,13 +31,13 @@ public class AlbumController {
     }
 
     @GetMapping("/search")
-    public List<AlbumDto> getAlbums(@RequestParam String searchFilter) throws IOException {
+    public List<Album> getAlbums(@RequestParam String searchFilter) throws IOException {
         return albumService.getAlbums(searchFilter);
     }
 
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping("/add/{albumId}")
-    public AlbumDto addAlbumToPersonalList(@PathVariable String albumId) {
+    public Album addAlbumToPersonalList(@PathVariable String albumId) {
         return albumService.addAlbumToPersonalList(albumId);
     }
 
@@ -47,12 +47,12 @@ public class AlbumController {
     }
 
     @PutMapping("/favorites/add")
-    public AlbumDto addAlbumToFavorites(@RequestBody AlbumRequest albumRequest) {
+    public Album addAlbumToFavorites(@RequestBody AlbumRequest albumRequest) {
         return albumService.addAlbumToFavorites(albumRequest.getAlbumId());
     }
 
     @PutMapping("/favorites/remove")
-    public AlbumDto removeAlbumFromFavorites(@RequestBody AlbumRequest albumRequest) {
+    public Album removeAlbumFromFavorites(@RequestBody AlbumRequest albumRequest) {
         return albumService.removeAlbumFromFavorites(albumRequest.getAlbumId());
     }
 }

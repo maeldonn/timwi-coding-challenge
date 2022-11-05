@@ -1,18 +1,18 @@
 package com.spotifychallenge.repository;
 
-import com.spotifychallenge.dto.AlbumDto;
+import com.spotifychallenge.model.Album;
 
 import java.util.Optional;
 
 public interface AlbumRepository {
 
-    Optional<AlbumDto> findAlbum(String albumId);
+    Optional<Album> findAlbum(String albumId);
 
-    AlbumDto addAlbumToPersonalList(AlbumDto album);
+    Album addAlbumToPersonalList(Album album);
 
     void removeAlbumFromPersonalList(String albumId);
 
-    AlbumDto addAlbumToFavorite(String albumId);
+    Album addAlbumToFavorite(String albumId);
 
-    AlbumDto removeAlbumFromFavorite(String albumId);
+    Album removeAlbumFromFavorite(String albumId);
 }

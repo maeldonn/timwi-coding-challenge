@@ -1,17 +1,17 @@
 package com.spotifychallenge.repository.mapper.impl;
 
 
-import com.spotifychallenge.dto.AlbumDto;
 import com.spotifychallenge.model.Album;
+import com.spotifychallenge.entity.AlbumEntity;
 import com.spotifychallenge.repository.mapper.SpotifyChallengeMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AlbumMapper implements SpotifyChallengeMapper<AlbumDto, Album> {
+public class AlbumMapper implements SpotifyChallengeMapper<Album, AlbumEntity> {
 
     @Override
-    public Album mapToEntity(AlbumDto model) {
-        Album album = new Album();
+    public AlbumEntity mapToEntity(Album model) {
+        AlbumEntity album = new AlbumEntity();
         album.setAlbumId(model.getAlbumId());
         album.setTitle(model.getTitle());
         album.setDate(model.getDate());
@@ -21,8 +21,8 @@ public class AlbumMapper implements SpotifyChallengeMapper<AlbumDto, Album> {
     }
 
     @Override
-    public AlbumDto mapToModel(Album entity) {
-        return AlbumDto.builder()
+    public Album mapToModel(AlbumEntity entity) {
+        return Album.builder()
             .albumId(entity.getAlbumId())
             .title(entity.getTitle())
             .date(entity.getDate())
