@@ -12,7 +12,5 @@ public interface AlbumService {
 
     void removeAlbumFromPersonalList(String albumId);
 
-    Album addAlbumToFavorites(String albumId);
-
-    Album removeAlbumFromFavorites(String albumId);
+    Album toggleFavoriteAlbum(String albumId);
 }

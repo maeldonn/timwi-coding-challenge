@@ -37,18 +37,10 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     public void removeAlbumFromPersonalList(String albumId) {
         repository.findById(albumId).ifPresent(repository::delete);
     }
-
     @Override
-    public Album addAlbumToFavorite(String albumId) {
+    public Album toggleFavoriteAlbum(String albumId) {
         AlbumEntity album = repository.getReferenceById(albumId);
-        album.setFavorite(true);
-        return mapper.mapToModel(album);
-    }
-
-    @Override
-    public Album removeAlbumFromFavorite(String albumId) {
-        AlbumEntity album = repository.getReferenceById(albumId);
-        album.setFavorite(false);
+        album.setFavorite(!album.getFavorite());
         return mapper.mapToModel(album);
     }
 }

@@ -48,13 +48,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     @Transactional
-    public Album addAlbumToFavorites(String albumId) {
-        return albumRepository.addAlbumToFavorite(albumId);
-    }
-
-    @Override
-    @Transactional
-    public Album removeAlbumFromFavorites(String albumId) {
-        return albumRepository.removeAlbumFromFavorite(albumId);
+    public Album toggleFavoriteAlbum(String albumId) {
+        return albumRepository.toggleFavoriteAlbum(albumId);
     }
 }

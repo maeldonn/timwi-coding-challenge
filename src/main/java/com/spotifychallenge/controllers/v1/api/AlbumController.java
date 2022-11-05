@@ -27,29 +27,24 @@ public class AlbumController {
         this.albumService = albumService;
     }
 
-    @GetMapping("/search")
+    @GetMapping
     public List<Album> getAlbums(@RequestParam String searchFilter) {
         return albumService.getAlbums(searchFilter);
     }
 
     @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping("/add/{albumId}")
-    public Album addAlbumToPersonalList(@PathVariable String albumId) {
-        return albumService.addAlbumToPersonalList(albumId);
+    @PostMapping("/{id}")
+    public Album addAlbumToPersonalList(@PathVariable String id) {
+        return albumService.addAlbumToPersonalList(id);
     }
 
-    @DeleteMapping("/remove/{albumId}")
-    public void removeAlbumFromList(@PathVariable String albumId) {
-        albumService.removeAlbumFromPersonalList(albumId);
+    @DeleteMapping("/{id}")
+    public void removeAlbumFromList(@PathVariable String id) {
+        albumService.removeAlbumFromPersonalList(id);
     }
 
-    @PutMapping("/favorites/add")
-    public Album addAlbumToFavorites(@RequestBody AlbumRequest albumRequest) {
-        return albumService.addAlbumToFavorites(albumRequest.getAlbumId());
-    }
-
-    @PutMapping("/favorites/remove")
-    public Album removeAlbumFromFavorites(@RequestBody AlbumRequest albumRequest) {
-        return albumService.removeAlbumFromFavorites(albumRequest.getAlbumId());
+    @PutMapping
+    public Album toggleFavoriteAlbum(@RequestBody AlbumRequest albumRequest) {
+        return albumService.toggleFavoriteAlbum(albumRequest.getAlbumId());
     }
 }

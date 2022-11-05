@@ -18,7 +18,7 @@ public class TagController {
         this.tagService = tagService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public Tag createTag(@RequestBody TagRequest tagRequest) {
         Tag tag = Tag.builder()
                 .name(tagRequest.getName())
