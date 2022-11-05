@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -18,7 +18,7 @@ public class Album {
 
     private String title;
 
-    private Date date;
+    private LocalDate date;
 
     private Integer duration;
 

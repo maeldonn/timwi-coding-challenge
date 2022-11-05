@@ -3,7 +3,7 @@ package com.spotifychallenge.restclient.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -22,7 +22,7 @@ public class SpotifyAlbum {
     private List<SpotifyAlbumImageDto> images = null;
 
     @JsonProperty("release_date")
-    private Date date = null;
+    private LocalDate date = null;
 
     @JsonProperty("total_tracks")
     private Integer duration = null;

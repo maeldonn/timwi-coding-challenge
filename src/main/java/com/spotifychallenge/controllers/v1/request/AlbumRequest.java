@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -29,7 +29,7 @@ public class AlbumRequest {
     private String thumbnail;
 
     @JsonProperty("date")
-    private Date date;
+    private LocalDate date;
 
     @JsonProperty("duration")
     private Integer duration;

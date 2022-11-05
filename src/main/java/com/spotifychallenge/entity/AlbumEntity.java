@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -31,7 +31,7 @@ public class AlbumEntity {
     private String title = null;
 
     @Column(name = "DATE")
-    private Date date = null;
+    private LocalDate date = null;
 
     @Column(name = "DURATION")
     private Integer duration = null;
