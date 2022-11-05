@@ -25,8 +25,19 @@ public class SpotifyAlbumMapper {
         String releaseDatePrecision = spotifyAlbum.getReleaseDatePrecision();
         return switch (releaseDatePrecision) {
             case "day" -> LocalDate.parse(spotifyAlbum.getReleaseDate());
-            case "year" -> LocalDate.ofYearDay(Integer.parseInt(spotifyAlbum.getReleaseDate()), 1);
+            case "month" -> getReleaseDateByMonth(spotifyAlbum.getReleaseDate());
+            case "year" -> getReleaseDateByYear(spotifyAlbum.getReleaseDate());
             default -> throw new SpotifyChallengeException("Unknown date format");
         };
+    }
+
+    private static LocalDate getReleaseDateByMonth(String releaseDate) {
+        String completeDate = releaseDate + "-01";
+        return LocalDate.parse(completeDate);
+    }
+
+    private static LocalDate getReleaseDateByYear(String releaseDate) {
+        String completeDate = releaseDate + "-01-01";
+        return LocalDate.parse(completeDate);
     }
 }
