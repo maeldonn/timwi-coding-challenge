@@ -14,24 +14,29 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.Optional;
 
-import static com.spotifychallenge.constants.SpotifyConstants.BASE_URL;
-import static com.spotifychallenge.constants.SpotifyConstants.GET_ALBUM;
-import static com.spotifychallenge.constants.SpotifyConstants.GET_ALBUMS;
-
 @Component
 public class SpotifyRestClient {
 
-    @Value("${token.secret}")
+    @Value("${spotify-api.token}")
     private String token;
+
+    @Value("${spotify-api.paths.base-url}")
+    private String baseUrl;
+
+    @Value("${spotify-api.paths.search-albums}")
+    private String getAlbums;
+
+    @Value("${spotify-api.paths.search-album}")
+    private String getAlbum;
 
     private final WebClient webClient;
 
     public SpotifyRestClient() {
-        this.webClient = WebClient.create(BASE_URL);
+        this.webClient = WebClient.create(baseUrl);
     }
 
     public List<Album> searchAlbums(String searchFilter) {
-        SpotifySearch search = webClient.get().uri(GET_ALBUMS + searchFilter)
+        SpotifySearch search = webClient.get().uri(getAlbums + searchFilter)
                 .headers(h -> h.setBearerAuth(token))
                 .retrieve()
                 .onStatus(HttpStatus::isError, response -> Mono.error(new ApiSearchException()))
@@ -47,7 +52,7 @@ public class SpotifyRestClient {
     }
 
     public Album searchAlbum(String albumId) {
-        SpotifyAlbum spotifyAlbum = webClient.get().uri(GET_ALBUM + albumId)
+        SpotifyAlbum spotifyAlbum = webClient.get().uri(getAlbum + albumId)
                 .headers(h -> h.setBearerAuth(token))
                 .retrieve()
                 .onStatus(HttpStatus::isError, response -> Mono.error(new ApiSearchException()))
