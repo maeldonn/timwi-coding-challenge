@@ -8,6 +8,8 @@ public interface AlbumService {
 
     List<Album> getAlbums(String searchFilter);
 
+    List<Album> getPersonalAlbums();
+
     Album addAlbumToPersonalList(String albumId);
 
     void removeAlbumFromPersonalList(String albumId);

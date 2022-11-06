@@ -1,6 +1,5 @@
 package com.spotifychallenge.repository.mapper.impl;
 
-
 import com.spotifychallenge.model.Tag;
 import com.spotifychallenge.entity.TagEntity;
 import com.spotifychallenge.repository.mapper.SpotifyChallengeMapper;

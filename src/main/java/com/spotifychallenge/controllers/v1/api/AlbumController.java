@@ -32,6 +32,11 @@ public class AlbumController {
         return albumService.getAlbums(searchFilter);
     }
 
+    @GetMapping("/personal")
+    public List<Album> getPersonalAlbums() {
+        return albumService.getPersonalAlbums();
+    }
+
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping("/{id}")
     public Album addAlbumToPersonalList(@PathVariable String id) {
@@ -45,6 +50,6 @@ public class AlbumController {
 
     @PutMapping
     public Album toggleFavoriteAlbum(@RequestBody AlbumRequest albumRequest) {
-        return albumService.toggleFavoriteAlbum(albumRequest.getAlbumId());
+        return albumService.toggleFavoriteAlbum(albumRequest.getId());
     }
 }

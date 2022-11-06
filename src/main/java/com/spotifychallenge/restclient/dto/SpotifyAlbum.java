@@ -15,10 +15,10 @@ public class SpotifyAlbum {
     private String title = null;
 
     @JsonProperty("artists")
-    private List<SpotifyArtistDto> artists = null;
+    private List<SpotifyArtist> artists = null;
 
     @JsonProperty("images")
-    private List<SpotifyAlbumImageDto> images = null;
+    private List<SpotifyAlbumImage> images = null;
 
     @JsonProperty("release_date")
     private String releaseDate = null;
@@ -30,7 +30,7 @@ public class SpotifyAlbum {
     private Integer duration = null;
 
     @Data
-    public static class SpotifyArtistDto {
+    public static class SpotifyArtist {
 
         @JsonProperty("id")
         private String id = null;
@@ -40,16 +40,16 @@ public class SpotifyAlbum {
     }
 
     @Data
-    public static class SpotifyAlbumImageDto {
+    public static class SpotifyAlbumImage {
 
         @JsonProperty("url")
         private String url = null;
 
         @JsonProperty("height")
-        private String height = null;
+        private Integer height = null;
 
         @JsonProperty("width")
-        private String width = null;
+        private Integer width = null;
     }
 }
 

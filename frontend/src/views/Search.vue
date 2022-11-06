@@ -1,19 +1,19 @@
 <template>
   <div class="search">
     <SearchForm v-on:search="search"/>
-    <SearchList :albums="albums"/>
+    <AlbumList :albums="albums" :isSearch="true"/>
   </div>
 </template>
 
 <script>
 import SearchForm from '@/components/search/SearchForm';
-import SearchList from '@/components/search/SearchList';
+import AlbumList from '@/components/shared/AlbumList';
 import {getAlbums} from "@/controllers/album.controller";
 
 export default {
   name: 'Search',
   components: {
-    SearchList,
+    AlbumList,
     SearchForm,
   },
   data() {

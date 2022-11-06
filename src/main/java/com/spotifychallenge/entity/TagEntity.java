@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,5 +27,9 @@ public class TagEntity {
     private String name = null;
 
     @ManyToMany(mappedBy = "tags")
-    List<AlbumEntity> albums = null;
+    List<AlbumEntity> albums = new ArrayList<>();
+
+    public boolean isMappedToOneAlbum() {
+        return albums.size() == 1;
+    }
 }

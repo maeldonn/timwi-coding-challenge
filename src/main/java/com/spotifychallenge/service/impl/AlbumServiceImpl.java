@@ -25,12 +25,13 @@ public class AlbumServiceImpl implements AlbumService {
     @Transactional(readOnly = true)
     public List<Album> getAlbums(String searchFilter) {
         List<Album> albums = spotifyRestClient.searchAlbums(searchFilter);
-
-        for (Album album : albums) {
-            albumRepository.findAlbum(album.getId()).ifPresent(personalAlbum -> album.setFavorite(personalAlbum.isFavorite()));
-        }
-
+        albums.forEach(album -> album.setPersonal(albumRepository.findAlbum(album.getId()).isPresent()));
         return albums;
+    }
+
+    @Override
+    public List<Album> getPersonalAlbums() {
+        return albumRepository.getAlbums();
     }
 
     @Override

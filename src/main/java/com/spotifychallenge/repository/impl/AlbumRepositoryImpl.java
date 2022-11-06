@@ -1,16 +1,23 @@
 package com.spotifychallenge.repository.impl;
 
-import com.spotifychallenge.model.Album;
 import com.spotifychallenge.entity.AlbumEntity;
+import com.spotifychallenge.entity.TagEntity;
+import com.spotifychallenge.model.Album;
 import com.spotifychallenge.repository.AlbumRepository;
 import com.spotifychallenge.repository.AlbumSpringDataRepository;
 import com.spotifychallenge.repository.mapper.impl.AlbumMapper;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class AlbumRepositoryImpl implements AlbumRepository {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final AlbumSpringDataRepository repository;
 
@@ -19,6 +26,11 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     public AlbumRepositoryImpl(AlbumSpringDataRepository repository, AlbumMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
+    }
+
+    @Override
+    public List<Album> getAlbums() {
+        return mapper.mapToModelList(repository.findAll());
     }
 
     @Override
@@ -35,8 +47,13 @@ public class AlbumRepositoryImpl implements AlbumRepository {
 
     @Override
     public void removeAlbumFromPersonalList(String albumId) {
-        repository.findById(albumId).ifPresent(repository::delete);
+        AlbumEntity albumToRemove = repository.getReferenceById(albumId);
+        albumToRemove.getTags().stream()
+                .filter(TagEntity::isMappedToOneAlbum)
+                .forEach(entityManager::remove);
+        repository.delete(albumToRemove);
     }
+
     @Override
     public Album toggleFavoriteAlbum(String albumId) {
         AlbumEntity album = repository.getReferenceById(albumId);

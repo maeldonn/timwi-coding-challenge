@@ -5,6 +5,8 @@ import com.spotifychallenge.model.Album;
 import com.spotifychallenge.restclient.dto.SpotifyAlbum;
 
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 public class SpotifyAlbumMapper {
 
@@ -16,9 +18,24 @@ public class SpotifyAlbumMapper {
         return Album.builder()
                 .id(spotifyAlbum.getId())
                 .title(spotifyAlbum.getTitle())
+                .artists(getArtists(spotifyAlbum))
+                .image(getImage(spotifyAlbum))
                 .releaseDate(getReleaseDate(spotifyAlbum))
                 .duration(spotifyAlbum.getDuration())
                 .build();
+    }
+
+    private static String getArtists(SpotifyAlbum spotifyAlbum) {
+        return spotifyAlbum.getArtists().stream()
+                .map(SpotifyAlbum.SpotifyArtist::getName)
+                .collect(Collectors.joining(", "));
+    }
+
+    private static String getImage(SpotifyAlbum spotifyAlbum) {
+        return spotifyAlbum.getImages().stream()
+                .max(Comparator.comparingInt(SpotifyAlbum.SpotifyAlbumImage::getWidth))
+                .map(SpotifyAlbum.SpotifyAlbumImage::getUrl)
+                .orElse(null);
     }
 
     private static LocalDate getReleaseDate(SpotifyAlbum spotifyAlbum) {

@@ -1,6 +1,5 @@
 package com.spotifychallenge.controllers.v1.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Value;
 
 import java.time.LocalDate;
@@ -8,24 +7,19 @@ import java.time.LocalDate;
 @Value
 public class AlbumRequest {
 
-    @JsonProperty("albumId")
-    String albumId;
+    String id;
 
-    @JsonProperty("title")
     String title;
 
-    @JsonProperty("artist")
-    String artist;
+    String artists;
 
-    @JsonProperty("thumbnail")
-    String thumbnail;
+    String image;
 
-    @JsonProperty("date")
-    LocalDate date;
+    LocalDate releaseDate;
 
-    @JsonProperty("duration")
     Integer duration;
 
-    @JsonProperty("favorite")
-    Boolean favorite;
+    boolean personal;
+
+    boolean favorite;
 }

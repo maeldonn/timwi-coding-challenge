@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,7 +27,13 @@ public class AlbumEntity {
     @Column(name = "TITLE")
     private String title = null;
 
-    @Column(name = "DATE")
+    @Column(name = "ARTISTS")
+    private String artists = null;
+
+    @Column(name = "IMAGE")
+    private String image = null;
+
+    @Column(name = "RELEASE_DATE")
     private LocalDate releaseDate = null;
 
     @Column(name = "DURATION")
@@ -40,5 +47,5 @@ public class AlbumEntity {
             name = "ALBUM_TAGS",
             joinColumns = @JoinColumn(name = "ALBUM_ID"),
             inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
-    List<TagEntity> tags = null;
+    List<TagEntity> tags = new ArrayList<>();
 }

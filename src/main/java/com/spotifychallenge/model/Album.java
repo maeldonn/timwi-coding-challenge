@@ -18,9 +18,15 @@ public class Album {
 
     private String title;
 
+    private String artists;
+
+    private String image;
+
     private LocalDate releaseDate;
 
     private Integer duration;
+
+    private boolean personal;
 
     private boolean favorite;
 
