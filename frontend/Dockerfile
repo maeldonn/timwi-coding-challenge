@@ -1,6 +1,8 @@
 ### STAGE 1: Build ###
 FROM node:12.7-alpine AS build
 
+ENV VUE_APP_ROOT_API=http://localhost:8080/api/v1
+
 COPY package.json ./
 
 RUN npm install
