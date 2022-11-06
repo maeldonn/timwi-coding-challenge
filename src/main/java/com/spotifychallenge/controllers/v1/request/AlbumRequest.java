@@ -1,42 +1,25 @@
 package com.spotifychallenge.controllers.v1.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.Value;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-/**
- * Album request
- */
-@Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Value
 public class AlbumRequest {
 
-    @JsonProperty("albumId")
-    private String albumId;
+    String id;
 
-    @JsonProperty("title")
-    private String title;
+    String title;
 
-    @JsonProperty("artist")
-    private String artist;
+    String artists;
 
-    @JsonProperty("thumbnail")
-    private String thumbnail;
+    String image;
 
-    @JsonProperty("date")
-    private Date date;
+    LocalDate releaseDate;
 
-    @JsonProperty("duration")
-    private Integer duration;
+    Integer duration;
 
-    @JsonProperty("favorite")
-    private Boolean favorite;
+    boolean personal;
+
+    boolean favorite;
 }

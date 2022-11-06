@@ -1,37 +1,17 @@
 package com.spotifychallenge.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 import java.util.List;
 
-/**
- * Tag Data Access Object
- */
-@Getter
-@Setter
-@NoArgsConstructor
-@EqualsAndHashCode
-@Entity
-@Table(name = "TAGS")
+@Data
+@Builder
 public class Tag {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "TAG_ID")
-    private Long tagId = null;
+    private Long id;
 
-    @Column(name = "NAME", unique = true)
-    private String name = null;
+    private String name;
 
-    @ManyToMany(mappedBy = "tags")
-    List<Album> albums = null;
+    private List<Album> albums;
 }

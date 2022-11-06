@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Album from '@/components/search/Album';
+import Album from '@/components/shared/Album';
 
 export default {
   name: 'SearchList',

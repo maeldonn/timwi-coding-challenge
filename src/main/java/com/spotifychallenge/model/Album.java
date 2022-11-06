@@ -1,51 +1,34 @@
 package com.spotifychallenge.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Album Data Access Object
- */
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode
-@Entity
-@Table(name = "ALBUMS")
+@AllArgsConstructor
 public class Album {
 
-    @Id
-    @Column(name = "ALBUM_ID")
-    private String albumId = null;
+    private String id;
 
-    @Column(name = "TITLE")
-    private String title = null;
+    private String title;
 
-    @Column(name = "DATE")
-    private Date date = null;
+    private String artists;
 
-    @Column(name = "DURATION")
-    private Integer duration = null;
+    private String image;
 
-    @Column(name = "FAVORITE")
-    private Boolean favorite = null;
+    private LocalDate releaseDate;
 
-    @ManyToMany
-    @JoinTable(
-        name = "ALBUM_TAGS",
-        joinColumns = @JoinColumn(name = "ALBUM_ID"),
-        inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
-    List<Tag> tags = null;
+    private Integer duration;
+
+    private boolean personal;
+
+    private boolean favorite;
+
+    private List<Tag> tags;
 }

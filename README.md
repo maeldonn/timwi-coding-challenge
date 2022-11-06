@@ -6,7 +6,8 @@ Développez les fonctionnalités suivantes dans la technologie web cible en util
 
 ### Pré-requis
 
-- Java 11
+- Java 17
+- Maven
 - Node/Npm
 - Docker
 
@@ -23,38 +24,28 @@ $ cd timwi-coding-challenge
 Ensuite vous devez installer les dépendances maven du projet spring boot
 
 ```shell
-$ ./mvnw clean install -DskipTests
+$ mvn clean install
 ```
 
 Ensuite vous devez installer les dépendances npm du projet Vue.js
 
 ```shell
 $ cd frontend
-```
-
-```shell
 $ npm install
 ```
 
 ### Génération d'un token
 
-Vous devez générer un [token](https://developer.spotify.com/console/get-search-item/). Il faudra ensuite l'exporter comme variable d'environnement.
-
-```shell
-$ EXPORT TOKEN=YOUR_TOKEN_HERE
-```
+Vous devez générer un [token](https://developer.spotify.com/console/get-search-item/).
 
 ## Démarrage
 
 ### Docker-compose
 
-On vient modifier la valeur de la variable *TOKEN* dans le fichier *start.sh* puis : 
+On vient modifier la valeur de la variable *SPOTIFY_TOKEN* dans le fichier *start.sh* puis : 
 
 ```shell
 $ chmod +x start.sh
-```
-
-```shell
 $ ./start.sh
 ```
 
@@ -66,22 +57,23 @@ Tout d'abord vous devez lancer la base de données :
 $ docker run --name postgresql-container -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres
 ```
 
-Ensuite on vient créer nos variables d'environnement avant de lancer le backend et on renseigne le token :
+Ensuite on vient renseigner le token dans le fichier *application.yml* de l'application spring boot :
 
-```shell
-$ export DB_HOST=localhost; export DB_PORT=5432; export DB_NAME=postgres; export DB_USERNAME=postgres; export DB_PASSWORD=password; export SPOTIFY_TOKEN=YOUR_TOKEN_HERE
+```yaml
+spotify-api:
+  token: // YOUR TOKEN HERE
  ```
 
 Ensuite vous devez lancer le backend en étant à la racine du projet :
 
 ```shell
-$ ./mvnw spring-boot:run
+$ mvn spring-boot:run
  ```
 
 Puis vous pouvez lancer le frontend en étant dans le dossier frontend :
 
 ```shell
-$ npm serve
+$ npm run serve
 ```
 
 ## Fabriqué avec

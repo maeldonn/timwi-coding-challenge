@@ -6,9 +6,10 @@
           v-model="searchFilter"
           filled
           label="Search"
+          @keyup.enter="search"
       ></v-text-field>
 
-      <v-btn icon @click="search()">
+      <v-btn icon @click="search">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
