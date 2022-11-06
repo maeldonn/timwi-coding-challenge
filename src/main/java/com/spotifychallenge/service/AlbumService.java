@@ -10,9 +10,9 @@ public interface AlbumService {
 
     List<Album> getPersonalAlbums();
 
-    Album addAlbumToPersonalList(String albumId);
+    Album addAlbumToPersonalList(String id);
 
-    void removeAlbumFromPersonalList(String albumId);
+    void removeAlbumFromPersonalList(String id);
 
-    Album toggleFavoriteAlbum(String albumId);
+    Album toggleFavoriteAlbum(String id);
 }

@@ -36,20 +36,20 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     @Transactional
-    public Album addAlbumToPersonalList(String albumId) {
-        Album album = spotifyRestClient.searchAlbum(albumId);
+    public Album addAlbumToPersonalList(String id) {
+        Album album = spotifyRestClient.searchAlbum(id);
         return albumRepository.addAlbumToPersonalList(album);
     }
 
     @Override
     @Transactional
-    public void removeAlbumFromPersonalList(String albumId) {
-        albumRepository.removeAlbumFromPersonalList(albumId);
+    public void removeAlbumFromPersonalList(String id) {
+        albumRepository.removeAlbumFromPersonalList(id);
     }
 
     @Override
     @Transactional
-    public Album toggleFavoriteAlbum(String albumId) {
-        return albumRepository.toggleFavoriteAlbum(albumId);
+    public Album toggleFavoriteAlbum(String id) {
+        return albumRepository.toggleFavoriteAlbum(id);
     }
 }

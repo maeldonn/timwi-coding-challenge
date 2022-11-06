@@ -9,11 +9,11 @@ public interface AlbumRepository {
 
     List<Album> getAlbums();
 
-    Optional<Album> findAlbum(String albumId);
+    Optional<Album> findAlbum(String id);
 
     Album addAlbumToPersonalList(Album album);
 
-    void removeAlbumFromPersonalList(String albumId);
+    void removeAlbumFromPersonalList(String id);
 
-    Album toggleFavoriteAlbum(String albumId);
+    Album toggleFavoriteAlbum(String id);
 }

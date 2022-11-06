@@ -34,8 +34,8 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     }
 
     @Override
-    public Optional<Album> findAlbum(String albumId) {
-        Optional<AlbumEntity> album = repository.findById(albumId);
+    public Optional<Album> findAlbum(String id) {
+        Optional<AlbumEntity> album = repository.findById(id);
         return album.map(mapper::mapToModel);
     }
 
@@ -46,8 +46,8 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     }
 
     @Override
-    public void removeAlbumFromPersonalList(String albumId) {
-        AlbumEntity albumToRemove = repository.getReferenceById(albumId);
+    public void removeAlbumFromPersonalList(String id) {
+        AlbumEntity albumToRemove = repository.getReferenceById(id);
         albumToRemove.getTags().stream()
                 .filter(TagEntity::isMappedToOneAlbum)
                 .forEach(entityManager::remove);
@@ -55,8 +55,8 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     }
 
     @Override
-    public Album toggleFavoriteAlbum(String albumId) {
-        AlbumEntity album = repository.getReferenceById(albumId);
+    public Album toggleFavoriteAlbum(String id) {
+        AlbumEntity album = repository.getReferenceById(id);
         album.setFavorite(!album.getFavorite());
         return mapper.mapToModel(album);
     }
