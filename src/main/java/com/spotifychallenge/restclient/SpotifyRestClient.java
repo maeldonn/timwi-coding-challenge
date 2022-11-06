@@ -5,7 +5,6 @@ import com.spotifychallenge.model.Album;
 import com.spotifychallenge.restclient.dto.SpotifyAlbum;
 import com.spotifychallenge.restclient.dto.SpotifySearch;
 import com.spotifychallenge.restclient.mapper.SpotifyAlbumMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -17,27 +16,20 @@ import java.util.Optional;
 @Component
 public class SpotifyRestClient {
 
-    @Value("${spotify-api.token}")
-    private String token;
-
-    @Value("${spotify-api.paths.base-url}")
-    private String baseUrl;
-
-    @Value("${spotify-api.paths.search-albums}")
-    private String getAlbums;
-
-    @Value("${spotify-api.paths.search-album}")
-    private String getAlbum;
-
     private final WebClient webClient;
 
-    public SpotifyRestClient() {
-        this.webClient = WebClient.create(baseUrl);
+    public SpotifyRestClient(WebClient webClient) {
+        this.webClient = webClient;
     }
 
     public List<Album> searchAlbums(String searchFilter) {
-        SpotifySearch search = webClient.get().uri(getAlbums + searchFilter)
-                .headers(h -> h.setBearerAuth(token))
+        SpotifySearch search = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/search")
+                        .queryParam("type", "album")
+                        .queryParam("q", searchFilter)
+                        .build()
+                )
                 .retrieve()
                 .onStatus(HttpStatus::isError, response -> Mono.error(new ApiSearchException()))
                 .bodyToMono(SpotifySearch.class)
@@ -51,9 +43,12 @@ public class SpotifyRestClient {
                 .toList();
     }
 
-    public Album searchAlbum(String albumId) {
-        SpotifyAlbum spotifyAlbum = webClient.get().uri(getAlbum + albumId)
-                .headers(h -> h.setBearerAuth(token))
+    public Album searchAlbum(String id) {
+        SpotifyAlbum spotifyAlbum = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/albums/{id}")
+                        .build(id)
+                )
                 .retrieve()
                 .onStatus(HttpStatus::isError, response -> Mono.error(new ApiSearchException()))
                 .bodyToMono(SpotifyAlbum.class)
