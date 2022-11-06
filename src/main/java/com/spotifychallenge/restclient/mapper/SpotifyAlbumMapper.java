@@ -1,6 +1,6 @@
 package com.spotifychallenge.restclient.mapper;
 
-import com.spotifychallenge.exception.SpotifyChallengeException;
+import com.spotifychallenge.exception.specific.AlbumMappingException;
 import com.spotifychallenge.model.Album;
 import com.spotifychallenge.restclient.dto.SpotifyAlbum;
 
@@ -44,7 +44,7 @@ public class SpotifyAlbumMapper {
             case "day" -> LocalDate.parse(spotifyAlbum.getReleaseDate());
             case "month" -> getReleaseDateByMonth(spotifyAlbum.getReleaseDate());
             case "year" -> getReleaseDateByYear(spotifyAlbum.getReleaseDate());
-            default -> throw new SpotifyChallengeException("Unknown date format");
+            default -> throw new AlbumMappingException();
         };
     }
 
